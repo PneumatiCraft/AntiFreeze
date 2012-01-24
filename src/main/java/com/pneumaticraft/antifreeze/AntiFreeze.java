@@ -8,12 +8,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.pneumaticraft.antifreeze.commands.*;
 import com.pneumaticraft.commandhandler.CommandHandler;
 
-class AntiFreeze extends JavaPlugin {
+public class AntiFreeze extends JavaPlugin {
     public static final String LOG_PREFIX = "[AntiFreeze] ";
     public static final Logger LOG = Logger.getLogger("Minecraft");
 
+    private AFPermissionsHandler permissionsHandler;
     private CommandHandler commandHandler;
 
     private boolean iceEnabled = false;
@@ -22,7 +24,18 @@ class AntiFreeze extends JavaPlugin {
     public void onEnable() {
         LOG.info(LOG_PREFIX + "Enabled!");
 
-        this.commandHandler = new CommandHandler(this, new AFPermissionsHandler(this));
+        this.initializePermissions();
+        this.loadCommands();
+    }
+
+    private void initializePermissions() {
+        this.permissionsHandler = new AFPermissionsHandler(this);
+    }
+
+    private void loadCommands() {
+        this.commandHandler = new CommandHandler(this, this.permissionsHandler);
+        
+        this.commandHandler.registerCommand(new AFIceCommand(this));
     }
 
     @Override
@@ -50,5 +63,9 @@ class AntiFreeze extends JavaPlugin {
 
     public void disableIce() {
         this.iceEnabled = false;
+    }
+
+    public AFPermissionsHandler getPermissionsHandler() {
+        return this.permissionsHandler;
     }
 }
