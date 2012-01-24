@@ -22,7 +22,7 @@ class AntiFreeze extends JavaPlugin {
     public void onEnable() {
         LOG.info(LOG_PREFIX + "Enabled!");
 
-        this.commandHandler = new CommandHandler(this, null);
+        this.commandHandler = new CommandHandler(this, new AFPermissionsHandler(this));
     }
 
     @Override
