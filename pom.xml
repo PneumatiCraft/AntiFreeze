@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.pneumaticraft.antifreeze</groupId>
     <artifactId>AntiFreeze</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <name>AntiFreeze</name>
     <description>Enables or disables the spread of ice globally for a Bukkit server.</description>
     <properties>
@@ -92,7 +92,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.1-R1-SNAPSHOT</version>
+            <version>1.2.5-R1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>

@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.pneumaticraft.antifreeze.commands.*;
+import com.pneumaticraft.antifreeze.listeners.*;
 import com.pneumaticraft.commandhandler.CommandHandler;
 
 public class AntiFreeze extends JavaPlugin {
@@ -26,6 +27,7 @@ public class AntiFreeze extends JavaPlugin {
 
         this.initializePermissions();
         this.loadCommands();
+        this.loadListeners();
     }
 
     private void initializePermissions() {
@@ -36,6 +38,10 @@ public class AntiFreeze extends JavaPlugin {
         this.commandHandler = new CommandHandler(this, this.permissionsHandler);
         
         this.commandHandler.registerCommand(new AFIceCommand(this));
+    }
+
+    private void loadListeners() {
+        this.getServer().getPluginManager().registerEvents(new AFBlockEventListener(this), this);
     }
 
     @Override
